@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "b221797a-3697-4fe1-a489-8c4eda545743",
+		"name": "LP - Blockchain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26612103"
+	},
+	"item": [
+		{
+			"name": "Add_Block",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vote\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/chain/add"
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Chain",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/chain/display"
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Length",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/chain/length"
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Votes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/chain/results"
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Winner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/chain/winner"
+			},
+			"response": []
+		}
+	]
+}
