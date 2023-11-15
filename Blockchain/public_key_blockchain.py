@@ -18,7 +18,7 @@ class pKeyChain:
         hexKey = hash_key.hexdigest()
 
         self.current_transactions = [{
-            "ID":hexKey
+            "public_key":hexKey
         }]
         self.chain = []
         self.nodes = set()
@@ -128,18 +128,21 @@ class pKeyChain:
     
     def validateKey(self,key):
         validVoteFlag = False
-        for block in self.chain:   
-            for transaction in block['transactions']:
-                if key == transaction['public_key']:
-                    validVoteFlag = True
-        return validVoteFlag
-    
+        try:
+            for block in self.chain:   
+                for transaction in block['transactions']:
+                    if key == transaction['public_key']:
+                        validVoteFlag = True
+            return validVoteFlag
+        except:
+            return False
+        
     def validateAdmin(self,key):
         validVoteFlag = True
         for block in self.chain:
             for transaction in block["transactions"]:
                 try:
-                    if transaction["ID"] == key:
+                    if transaction["public_key"] == key:
                             return True
                 except:
                     return False
