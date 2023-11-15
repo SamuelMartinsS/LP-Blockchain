@@ -2,12 +2,13 @@
 #                       BIBLIOTECAS NECESSÁRIAS
 ##################################################################################################
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 from uuid import uuid4
 import hashlib
 from time import time
-from vote_blockchain import voteChain,encrypt_vote
-from public_key_blockchain import pKeyChain
+from Blockchain.vote_blockchain import voteChain,encrypt_vote
+from Blockchain.public_key_blockchain import pKeyChain
 import socket
 from cryptography.fernet import Fernet
 
@@ -16,6 +17,7 @@ from cryptography.fernet import Fernet
 ##################################################################################################
 
 app = Flask(__name__)
+CORS(app)
 
 node_identifier = str(uuid4()).replace('-', '')
 
@@ -28,6 +30,16 @@ key = Fernet.generate_key()
 #                       ROTAS DESTINADAS À VOTAÇÃO
 ##################################################################################################
 
+
+#################################################################################################
+#                       RENDERER
+#################################################################################################
+
+@app.route('/')
+def renderIndex():
+    return render_template('index.html')
+
+
 ##################################################################################################
 #                       REALIZAR VOTAÇÃO
 ##################################################################################################
@@ -39,7 +51,7 @@ def voteMine():
     data = request.json
 
     vote = str(data.get("vote"))
-    public_key = str(data.get("p_key"))
+    public_key = str(data.get("p_key")) 
 
     # Método para verificar a validade da chave publica (se é válida & não foi utilizada) 
     if keyChain.validateKey(public_key) and blockchain.validateKey(public_key) :
@@ -190,9 +202,10 @@ def keyDisplay():
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-
     parser = ArgumentParser()
     parser.add_argument('-p', '--port', default=5000, type=int, help='port to listen on')
     args = parser.parse_args()
     port = args.port
     app.run(host='0.0.0.0', port=port)
+
+
