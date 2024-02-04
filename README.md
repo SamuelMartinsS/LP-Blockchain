@@ -9,10 +9,3 @@ Idealmente são utilizadas duas blockchains:
 - (2) - Guarda as chaves publicas
 
 As chaves publicas(2) são utilizadas para validar a identidade do utilizador. Depois da chave ser utilizada, esta vai ser bloqueada, e por isso, não vai ser possivel enviar outro voto com a mesma chave.
-
-
-## TODO
-
-- É necessário rever as validações das chaves publicas através de uma chave privada.
-- É necessário elaborar o front-end da página de votação de adminsitração
- 
